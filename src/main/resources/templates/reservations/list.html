@@ -9,62 +9,69 @@
 
 <h1>予約一覧</h1>
 
-<!-- 氏名で予約を検索する -->
-<form th:action="@{/reservations/search}" method="get">
+<!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
+<form th:action="@{/reservations}" method="get">
 
-    <label for="customerName">氏名検索</label>
+    <div>
+        <!-- 氏名を部分一致で検索する -->
+        <label for="customerName">氏名検索</label>
 
-    <input
-            type="text"
-            id="customerName"
-            name="customerName"
-            th:value="${customerName}"
-            placeholder="氏名を入力"
-    >
+        <input
+                type="text"
+                id="customerName"
+                name="customerName"
+                th:value="${customerName}"
+                placeholder="氏名を入力"
+        >
+    </div>
 
-    <button type="submit">検索</button>
+    <div>
+        <!-- 予約希望日を指定して検索する -->
+        <label for="preferredDate">予約希望日検索</label>
+
+        <input
+                type="date"
+                id="preferredDate"
+                name="preferredDate"
+                th:value="${preferredDate}"
+        >
+    </div>
+
+    <div>
+        <!-- 予約希望日の並び順を指定する -->
+        <label for="order">並び順</label>
+
+        <select id="order" name="order">
+
+            <option
+                    value="asc"
+                    th:selected="${order == null or order == 'asc'}"
+            >
+                予約希望日の近い順
+            </option>
+
+            <option
+                    value="desc"
+                    th:selected="${order == 'desc'}"
+            >
+                予約希望日の遠い順
+            </option>
+
+        </select>
+    </div>
+
+    <div>
+        <!-- 指定した条件で検索・並び替えを行う -->
+        <button type="submit">検索・並び替え</button>
+    </div>
 
 </form>
 
-<!-- 予約希望日を指定して予約を検索する -->
-<form th:action="@{/reservations/date-search}" method="get">
-
-    <label for="preferredDate">予約希望日検索</label>
-
-    <input
-            type="date"
-            id="preferredDate"
-            name="preferredDate"
-            th:value="${preferredDate}"
-    >
-
-    <button type="submit">検索</button>
-
-</form>
-
-<!-- 予約希望日で一覧を並び替える -->
-<form th:action="@{/reservations/sort}" method="get">
-
-    <label for="order">並び順</label>
-
-    <select id="order" name="order">
-        <option value="asc"
-                th:selected="${order == null or order == 'asc'}">
-            予約希望日の近い順
-        </option>
-
-        <option value="desc"
-                th:selected="${order == 'desc'}">
-            予約希望日の遠い順
-        </option>
-    </select>
-
-    <button type="submit">並び替え</button>
-</form>
-
+<!-- 検索条件をすべて解除して予約一覧を表示する -->
 <p>
-    <a th:href="@{/reservations}">検索をクリア</a>
+    <a th:href="@{/reservations}">検索条件をクリア</a>
 </p>
+
 
 <!-- 予約が1件もない場合に表示する -->
 <p th:if="${#lists.isEmpty(reservations)}">

@@ -70,15 +70,38 @@ public class ReservationController {
         return "reservations/complete";
     }
 
-    // 予約一覧画面を表示する
+    // 予約一覧を表示する
+// 氏名・予約希望日・並び順を同時に受け取り、検索条件を保持する
     @GetMapping("/reservations")
-    public String showReservationList(Model model) {
+    public String showReservationList(
+            @RequestParam(required = false) String customerName,
+            @RequestParam(required = false) String preferredDate,
+            @RequestParam(defaultValue = "asc") String order,
+            Model model) {
 
-        // データベースに保存されている予約情報をすべて取得する
-        List<Reservation> reservations = reservationService.getAllReservations();
+        // 予約希望日を格納する変数
+        LocalDate date = null;
 
-        // 取得した予約情報を予約一覧画面で使用できるようにModelへ渡す
+        // 予約希望日が入力されている場合のみLocalDateへ変換する
+        if (preferredDate != null && !preferredDate.isBlank()) {
+            date = LocalDate.parse(preferredDate);
+        }
+
+        // 氏名・予約希望日・並び順を指定して予約情報を取得する
+        List<Reservation> reservations =
+                reservationService.searchReservations(
+                        customerName,
+                        date,
+                        order
+                );
+
+        // 検索結果を一覧画面へ渡す
         model.addAttribute("reservations", reservations);
+
+        // 検索後も入力した条件を画面に残す
+        model.addAttribute("customerName", customerName);
+        model.addAttribute("preferredDate", preferredDate);
+        model.addAttribute("order", order);
 
         // 予約一覧画面を表示する
         return "reservations/list";

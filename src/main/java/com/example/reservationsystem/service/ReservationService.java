@@ -64,4 +64,45 @@ public class ReservationService {
     public List<Reservation> getReservationsByPreferredDateDesc() {
         return reservationRepository.findAllByOrderByPreferredDateDesc();
     }
+
+    // 氏名・予約希望日・並び順を組み合わせて予約情報を検索する
+    public List<Reservation> searchReservations(
+            String customerName,
+            LocalDate preferredDate,
+            String order) {
+
+        List<Reservation> reservations;
+
+        // まず並び順に応じて全予約を取得する
+        if ("desc".equals(order)) {
+
+            // 予約希望日の遠い順で取得する
+            reservations =
+                    reservationRepository.findAllByOrderByPreferredDateDesc();
+
+        } else {
+
+            // 予約希望日の近い順で取得する
+            reservations =
+                    reservationRepository.findAllByOrderByPreferredDateAsc();
+        }
+
+        // 氏名が入力されている場合は部分一致で絞り込む
+        if (customerName != null && !customerName.isBlank()) {
+            reservations = reservations.stream()
+                    .filter(reservation ->
+                            reservation.getCustomerName().contains(customerName))
+                    .toList();
+        }
+
+        // 予約希望日が指定されている場合は一致する予約だけに絞り込む
+        if (preferredDate != null) {
+            reservations = reservations.stream()
+                    .filter(reservation ->
+                            preferredDate.equals(reservation.getPreferredDate()))
+                    .toList();
+        }
+
+        return reservations;
+    }
 }
