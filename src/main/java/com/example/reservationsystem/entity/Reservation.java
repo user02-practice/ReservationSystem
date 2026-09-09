@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 // 入力値が空欄ではないことをチェックするために使用する
 import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 // 日付を扱うために使用する
 import java.time.LocalDate;
@@ -29,12 +30,15 @@ public class Reservation {
 
     // 予約人数
     // 1人以上であることをチェックする
+    @NotNull(message = "人数を入力してください")
     @Min(value = 1, message = "人数は1人以上を入力してください")
-    private int numberOfPeople;
+    private Integer numberOfPeople;
 
     // 予約希望日
-    // 未入力を禁止する
+// 未入力を禁止する
+// HTMLの日付入力欄で扱える yyyy-MM-dd 形式として指定する
     @NotNull(message = "予約希望日を入力してください")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate preferredDate;
 
     // 予約者の電話番号
@@ -70,11 +74,11 @@ public class Reservation {
         this.customerName = customerName;
     }
 
-    public int getNumberOfPeople() {
+    public Integer getNumberOfPeople() {
         return numberOfPeople;
     }
 
-    public void setNumberOfPeople(int numberOfPeople) {
+    public void setNumberOfPeople(Integer numberOfPeople) {
         this.numberOfPeople = numberOfPeople;
     }
 
