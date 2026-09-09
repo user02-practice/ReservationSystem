@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>予約登録</title>
+</head>
+
+<body>
+
+<h1>予約登録</h1>
+
+<form th:action="@{/reservations}" th:object="${reservation}" method="post">
+    <div>
+        <!-- 予約者の氏名を入力する -->
+        <label for="customerName">氏名 ※必須</label>
+
+        <input
+                type="text"
+                id="customerName"
+                th:field="*{customerName}"
+        >
+
+        <!-- 氏名に入力エラーがある場合にメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('customerName')}"
+           th:errors="*{customerName}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 予約人数を入力する -->
+        <label for="numberOfPeople">人数 ※必須</label>
+
+        <input
+                type="number"
+                id="numberOfPeople"
+                th:field="*{numberOfPeople}"
+                min="1"
+        >
+        <span>人</span>
+
+        <!-- 人数に入力エラーがある場合にメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('numberOfPeople')}"
+           th:errors="*{numberOfPeople}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 予約希望日を入力する -->
+        <label for="preferredDate">予約希望日 ※必須</label>
+
+        <input
+                type="date"
+                id="preferredDate"
+                th:field="*{preferredDate}"
+        >
+
+        <!-- 予約希望日に入力エラーがある場合にメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('preferredDate')}"
+           th:errors="*{preferredDate}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 予約者の電話番号を入力する -->
+        <label for="phoneNumber">電話番号 ※必須</label>
+
+        <input
+                type="tel"
+                id="phoneNumber"
+                th:field="*{phoneNumber}"
+        >
+
+        <!-- 電話番号に入力エラーがある場合にメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('phoneNumber')}"
+           th:errors="*{phoneNumber}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 予約者のメールアドレスを入力する -->
+        <label for="email">メールアドレス ※必須</label>
+
+        <input
+                type="email"
+                id="email"
+                th:field="*{email}"
+        >
+
+        <!-- メールアドレスに入力エラーがある場合にメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('email')}"
+           th:errors="*{email}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 予約に関する備考を入力する -->
+        <label for="remarks">備考（任意・100文字以内）</label>
+
+        <textarea
+                id="remarks"
+                th:field="*{remarks}"
+                maxlength="100"
+                placeholder="お目当てのアーティスト等"
+        ></textarea>
+
+        <!-- 備考が100文字を超えている場合にエラーメッセージを表示する -->
+        <p th:if="${#fields.hasErrors('remarks')}"
+           th:errors="*{remarks}">
+        </p>
+    </div>
+
+    <div>
+        <!-- 入力した予約情報を送信する -->
+        <button type="submit">予約する</button>
+    </div>
+
+</form>
+
+</body>
+</html>
