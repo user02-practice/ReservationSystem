@@ -72,7 +72,7 @@ public class ReservationController {
 
     // 予約一覧を表示する
 // 氏名・予約希望日・並び順を同時に受け取り、検索条件を保持する
-    @GetMapping("/reservations")
+    @GetMapping("/admin/reservations")
     public String showReservationList(
             @RequestParam(required = false) String customerName,
             @RequestParam(required = false) String preferredDate,
@@ -108,7 +108,7 @@ public class ReservationController {
     }
 
     // 予約詳細画面を表示する
-    @GetMapping("/reservations/{id}")
+    @GetMapping("/admin/reservations/{id}")
     public String showReservationDetail(
             @PathVariable Long id,
             Model model) {
@@ -118,7 +118,7 @@ public class ReservationController {
 
         // 該当する予約が見つからない場合は予約一覧画面へ戻る
         if (reservation == null) {
-            return "redirect:/reservations";
+            return "redirect:/admin/reservations";
         }
 
         // 取得した予約情報を詳細画面で使用できるようにModelへ渡す
@@ -129,7 +129,7 @@ public class ReservationController {
     }
 
     // 予約編集画面を表示する
-    @GetMapping("/reservations/{id}/edit")
+    @GetMapping("/admin/reservations/{id}/edit")
     public String showEditForm(
             @PathVariable Long id,
             Model model) {
@@ -139,7 +139,7 @@ public class ReservationController {
 
         // 該当する予約が見つからない場合は、予約一覧画面へ戻る
         if (reservation == null) {
-            return "redirect:/reservations";
+            return "redirect:/admin/reservations";
         }
 
         // 編集画面で現在の予約情報を使用できるようにModelへ渡す
@@ -150,7 +150,7 @@ public class ReservationController {
     }
 
     // 編集フォームから送信された予約情報を更新する
-    @PostMapping("/reservations/{id}")
+    @PostMapping("/admin/reservations/{id}")
     public String updateReservation(
             @PathVariable Long id,
             @Valid Reservation reservation,
@@ -177,97 +177,18 @@ public class ReservationController {
         reservationService.saveReservation(reservation);
 
         // 更新後は予約詳細画面へ移動する
-        return "redirect:/reservations/" + id;
+        return "redirect:/admin/reservations/" + id;
     }
 
     // 指定した予約IDの予約情報を削除する
-    @PostMapping("/reservations/{id}/delete")
+    @PostMapping("/admin/reservations/{id}/delete")
     public String deleteReservation(@PathVariable Long id) {
 
         // 予約IDを使って、該当する予約情報を削除する
         reservationService.deleteReservation(id);
 
         // 削除後は予約一覧画面へ戻る
-        return "redirect:/reservations";
+        return "redirect:/admin/reservations";
     }
 
-    // 氏名の一部を指定して予約情報を検索する
-    @GetMapping("/reservations/search")
-    public String searchReservationsByCustomerName(
-            @RequestParam String customerName,
-            Model model) {
-
-        // 氏名の部分一致検索を行う
-        List<Reservation> reservations =
-                reservationService.searchByCustomerName(customerName);
-
-        // 検索結果を予約一覧画面へ渡す
-        model.addAttribute("reservations", reservations);
-
-        // 入力した検索文字も画面に戻す
-        model.addAttribute("customerName", customerName);
-
-        // 予約一覧画面を表示する
-        return "reservations/list";
-    }
-
-    // 予約希望日の並び順を指定して予約一覧を表示する
-    @GetMapping("/reservations/sort")
-    public String sortReservations(
-            @RequestParam String order,
-            Model model) {
-
-        List<Reservation> reservations;
-
-        // orderの値によって並び順を切り替える
-        if ("desc".equals(order)) {
-
-            // 予約希望日の遠い順で取得する
-            reservations =
-                    reservationService.getReservationsByPreferredDateDesc();
-
-        } else {
-
-            // 予約希望日の近い順で取得する
-            reservations =
-                    reservationService.getReservationsByPreferredDateAsc();
-        }
-
-        // 並び替えた予約一覧を画面へ渡す
-        model.addAttribute("reservations", reservations);
-
-        // 現在選択している並び順も画面へ渡す
-        model.addAttribute("order", order);
-
-        // 予約一覧画面を表示する
-        return "reservations/list";
-    }
-
-    // 予約希望日を指定して予約情報を検索する
-    @GetMapping("/reservations/date-search")
-    public String searchReservationsByPreferredDate(
-            @RequestParam(required = false) String preferredDate,
-            Model model) {
-
-        // 予約希望日が入力されていない場合は、予約一覧画面へ戻る
-        if (preferredDate == null || preferredDate.isBlank()) {
-            return "redirect:/reservations";
-        }
-
-        // 文字列で受け取った日付をLocalDateに変換する
-        LocalDate date = LocalDate.parse(preferredDate);
-
-        // 指定した予約希望日の予約情報を検索する
-        List<Reservation> reservations =
-                reservationService.searchByPreferredDate(date);
-
-        // 検索結果を予約一覧画面へ渡す
-        model.addAttribute("reservations", reservations);
-
-        // 検索した予約希望日を画面へ戻す
-        model.addAttribute("preferredDate", date);
-
-        // 予約一覧画面を表示する
-        return "reservations/list";
-    }
 }

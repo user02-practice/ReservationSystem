@@ -48,13 +48,13 @@
 
 <!-- 現在表示している予約のIDを使って編集画面へ移動する -->
 <p>
-    <a th:href="@{/reservations/{id}/edit(id=${reservation.id})}">
+    <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}">
         編集する
     </a>
 </p>
 
 <!-- 現在表示している予約を削除する -->
-<form th:action="@{/reservations/{id}/delete(id=${reservation.id})}"
+<form th:action="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
       method="post"
       onsubmit="return confirm('この予約を削除してもよろしいですか？');">
 
@@ -63,7 +63,7 @@
 
 <!-- 予約一覧画面へ戻る -->
 <p>
-    <a th:href="@{/reservations}">予約一覧に戻る</a>
+    <a th:href="@{/admin/reservations}">予約一覧に戻る</a>
 </p>
 
 </body>

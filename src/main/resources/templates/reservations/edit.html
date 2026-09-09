@@ -10,7 +10,7 @@
 <h1>予約編集</h1>
 
 <!-- 現在の予約情報を編集するフォーム -->
-<form th:action="@{/reservations/{id}(id=${reservation.id})}"
+<form th:action="@{/admin/reservations/{id}(id=${reservation.id})}"
       th:object="${reservation}"
       method="post">
 
@@ -122,7 +122,7 @@
 
 <!-- 変更せず予約詳細画面へ戻る -->
 <p>
-    <a th:href="@{/reservations/{id}(id=${reservation.id})}">
+    <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
         予約詳細に戻る
     </a>
 </p>

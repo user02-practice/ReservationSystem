@@ -10,7 +10,7 @@
 <h1>予約一覧</h1>
 
 <!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
-<form th:action="@{/reservations}" method="get">
+<form th:action="@{/admin/reservations}" method="get">
 
     <div>
         <!-- 氏名を部分一致で検索する -->
@@ -69,7 +69,7 @@
 
 <!-- 検索条件をすべて解除して予約一覧を表示する -->
 <p>
-    <a th:href="@{/reservations}">検索条件をクリア</a>
+    <a th:href="@{/admin/reservations}">検索条件をクリア</a>
 </p>
 
 
@@ -114,7 +114,7 @@
 
         <td>
             <!-- 予約IDをURLに含めて詳細画面へ移動する -->
-            <a th:href="@{/reservations/{id}(id=${reservation.id})}">
+            <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
                 詳細
             </a>
         </td>
