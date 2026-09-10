@@ -21,10 +21,11 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
 
-                        // お客様用の予約登録画面は誰でもアクセス可能
+                        // お客様用の予約登録画面・予約処理・エラー画面は誰でもアクセス可能
                         .requestMatchers(
                                 "/reservations/new",
-                                "/reservations"
+                                "/reservations",
+                                "/error"
                         ).permitAll()
 
                         // 管理者用画面はADMIN権限を持つユーザーだけアクセス可能

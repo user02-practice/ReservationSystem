@@ -55,7 +55,7 @@ class ReservationControllerTest {
         )).thenReturn(List.of());
 
         mockMvc.perform(
-                        get("/reservations")
+                        get("/admin/reservations")
                                 .param("customerName", "山田")
                                 .param("order", "asc")
                 )
@@ -88,7 +88,7 @@ class ReservationControllerTest {
         )).thenReturn(List.of());
 
         mockMvc.perform(
-                        get("/reservations")
+                        get("/admin/reservations")
                                 .param("preferredDate", "2026-09-30")
                                 .param("order", "asc")
                 )
@@ -118,7 +118,7 @@ class ReservationControllerTest {
         )).thenReturn(List.of());
 
         mockMvc.perform(
-                        get("/reservations")
+                        get("/admin/reservations")
                                 .param("order", "desc")
                 )
                 .andExpect(status().isOk())
@@ -148,7 +148,7 @@ class ReservationControllerTest {
         )).thenReturn(List.of(reservation));
 
         mockMvc.perform(
-                        get("/reservations")
+                        get("/admin/reservations")
                                 .param("customerName", "山田")
                                 .param(
                                         "preferredDate",

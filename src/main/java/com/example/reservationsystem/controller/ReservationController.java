@@ -4,6 +4,7 @@ package com.example.reservationsystem.controller;
 import com.example.reservationsystem.entity.Reservation;
 
 // GETリクエストを受け取るために使用する
+import com.example.reservationsystem.service.MailService;
 import org.springframework.web.bind.annotation.GetMapping;
 
 // HTMLへデータを渡すために使用する
@@ -31,9 +32,16 @@ public class ReservationController {
     // 予約に関する処理を行うService
     private final ReservationService reservationService;
 
+    // 予約確認メールを送信するService
+    private final MailService mailService;
+
     // ReservationServiceを受け取るコンストラクタ
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(
+            ReservationService reservationService,
+            MailService mailService) {
+
         this.reservationService = reservationService;
+        this.mailService = mailService;
     }
 
     // 予約登録画面を表示する
@@ -62,6 +70,14 @@ public class ReservationController {
         // 入力内容に問題がなければ、予約情報をデータベースに保存する
         Reservation savedReservation =
                 reservationService.saveReservation(reservation);
+
+        // 予約者へ予約確認メールを送信する
+        mailService.sendReservationConfirmation(
+                savedReservation.getEmail(),
+                savedReservation.getCustomerName(),
+                savedReservation.getPreferredDate().toString(),
+                savedReservation.getNumberOfPeople()
+        );
 
         // 予約完了画面で表示するために、保存済みの予約情報を渡す
         model.addAttribute("reservation", savedReservation);
