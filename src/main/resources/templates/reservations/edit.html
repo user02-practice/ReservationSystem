@@ -3,129 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>予約編集</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+<div class="container">
 
-<h1>予約編集</h1>
+    <h1>予約編集</h1>
 
-<!-- 現在の予約情報を編集するフォーム -->
-<form th:action="@{/admin/reservations/{id}(id=${reservation.id})}"
-      th:object="${reservation}"
-      method="post">
+    <!-- 現在の予約情報を編集するフォーム -->
+    <form th:action="@{/admin/reservations/{id}(id=${reservation.id})}"
+          th:object="${reservation}"
+          method="post">
 
-    <div>
-        <!-- 予約者の氏名 -->
-        <label for="customerName">氏名 ※必須</label>
+        <div>
+            <!-- 予約者の氏名 -->
+            <label for="customerName">氏名 ※必須</label>
 
-        <input
-                type="text"
-                id="customerName"
-                th:field="*{customerName}"
-        >
+            <input
+                    type="text"
+                    id="customerName"
+                    th:field="*{customerName}"
+            >
 
-        <!-- 氏名に入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('customerName')}"
-           th:errors="*{customerName}">
-        </p>
-    </div>
+            <!-- 氏名に入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('customerName')}"
+               th:errors="*{customerName}">
+            </p>
+        </div>
 
-    <div>
-        <!-- 予約人数 -->
-        <label for="numberOfPeople">人数 ※必須</label>
+        <div>
+            <!-- 予約人数 -->
+            <label for="numberOfPeople">人数 ※必須</label>
 
-        <input
-                type="number"
-                id="numberOfPeople"
-                th:field="*{numberOfPeople}"
-                min="1"
-        >
-        <span>人</span>
+            <input
+                    type="number"
+                    id="numberOfPeople"
+                    th:field="*{numberOfPeople}"
+                    min="1"
+            >
+            <span>人</span>
 
-        <!-- 人数に入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('numberOfPeople')}"
-           th:errors="*{numberOfPeople}">
-        </p>
-    </div>
+            <!-- 人数に入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('numberOfPeople')}"
+               th:errors="*{numberOfPeople}">
+            </p>
+        </div>
 
-    <div>
-        <!-- 予約希望日 -->
-        <label for="preferredDate">予約希望日 ※必須</label>
+        <div>
+            <!-- 予約希望日 -->
+            <label for="preferredDate">予約希望日 ※必須</label>
 
-        <input
-                type="date"
-                id="preferredDate"
-                th:field="*{preferredDate}"
-        >
+            <input
+                    type="date"
+                    id="preferredDate"
+                    th:field="*{preferredDate}"
+            >
 
-        <!-- 予約希望日に入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('preferredDate')}"
-           th:errors="*{preferredDate}">
-        </p>
-    </div>
+            <!-- 予約希望日に入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('preferredDate')}"
+               th:errors="*{preferredDate}">
+            </p>
+        </div>
 
-    <div>
-        <!-- 電話番号 -->
-        <label for="phoneNumber">電話番号 ※必須</label>
+        <div>
+            <!-- 電話番号 -->
+            <label for="phoneNumber">電話番号 ※必須</label>
 
-        <input
-                type="tel"
-                id="phoneNumber"
-                th:field="*{phoneNumber}"
-        >
+            <input
+                    type="tel"
+                    id="phoneNumber"
+                    th:field="*{phoneNumber}"
+            >
 
-        <!-- 電話番号に入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('phoneNumber')}"
-           th:errors="*{phoneNumber}">
-        </p>
-    </div>
+            <!-- 電話番号に入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('phoneNumber')}"
+               th:errors="*{phoneNumber}">
+            </p>
+        </div>
 
-    <div>
-        <!-- メールアドレス -->
-        <label for="email">メールアドレス ※必須</label>
+        <div>
+            <!-- メールアドレス -->
+            <label for="email">メールアドレス ※必須</label>
 
-        <input
-                type="email"
-                id="email"
-                th:field="*{email}"
-        >
+            <input
+                    type="email"
+                    id="email"
+                    th:field="*{email}"
+            >
 
-        <!-- メールアドレスに入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('email')}"
-           th:errors="*{email}">
-        </p>
-    </div>
+            <!-- メールアドレスに入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}">
+            </p>
+        </div>
 
-    <div>
-        <!-- 備考 -->
-        <label for="remarks">備考（任意・100文字以内）</label>
+        <div>
+            <!-- 備考 -->
+            <label for="remarks">備考（任意・100文字以内）</label>
 
-        <textarea
-                id="remarks"
-                th:field="*{remarks}"
-                maxlength="100"
-                placeholder="お目当てのアーティスト等"
-        ></textarea>
+            <textarea
+                    id="remarks"
+                    th:field="*{remarks}"
+                    maxlength="100"
+                    placeholder="お目当てのアーティスト等"
+            ></textarea>
 
-        <!-- 備考に入力エラーがある場合に表示する -->
-        <p th:if="${#fields.hasErrors('remarks')}"
-           th:errors="*{remarks}">
-        </p>
-    </div>
+            <!-- 備考に入力エラーがある場合に表示する -->
+            <p th:if="${#fields.hasErrors('remarks')}"
+               th:errors="*{remarks}">
+            </p>
+        </div>
 
-    <div>
-        <!-- 編集した予約情報を送信する -->
-        <button type="submit">変更を保存する</button>
-    </div>
+        <div>
+            <!-- 編集した予約情報を送信する -->
+            <button type="submit">変更を保存する</button>
+        </div>
 
-</form>
+    </form>
 
-<!-- 変更せず予約詳細画面へ戻る -->
-<p>
-    <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
-        予約詳細に戻る
-    </a>
-</p>
-
+    <!-- 変更せず予約詳細画面へ戻る -->
+    <p>
+        <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
+            予約詳細に戻る
+        </a>
+    </p>
+</div>
 </body>
 </html>

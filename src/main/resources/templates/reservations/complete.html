@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>予約完了</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+<div class="container">
 
-<h1>予約完了</h1>
+    <h1>予約完了</h1>
 
-<p>ご予約ありがとうございます。</p>
+    <p>ご予約ありがとうございます。</p>
 
-<div>
-    <p>
-        氏名：
-        <span th:text="${reservation.customerName}"></span>
-    </p>
+    <div>
+        <p>
+            氏名：
+            <span th:text="${reservation.customerName}"></span>
+        </p>
 
-    <p>
-        人数：
-        <span th:text="${reservation.numberOfPeople}"></span>
-        人
-    </p>
+        <p>
+            人数：
+            <span th:text="${reservation.numberOfPeople}"></span>
+            人
+        </p>
 
-    <p>
-        予約希望日：
-        <span th:text="${reservation.preferredDate}"></span>
-    </p>
+        <p>
+            予約希望日：
+            <span th:text="${reservation.preferredDate}"></span>
+        </p>
+    </div>
+
+    <p>予約を受け付けました。</p>
+
+    <a th:href="@{/reservations/new}">予約フォームに戻る</a>
+
 </div>
-
-<p>予約を受け付けました。</p>
-
-<a th:href="@{/reservations/new}">予約フォームに戻る</a>
-
 </body>
 </html>

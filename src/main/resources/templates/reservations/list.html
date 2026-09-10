@@ -3,130 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <title>予約一覧</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+<div class="container">
+    <h1>予約一覧</h1>
 
-<h1>予約一覧</h1>
+    <!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
+    <form th:action="@{/admin/reservations}" method="get">
 
-<!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
-<form th:action="@{/admin/reservations}" method="get">
+        <div>
+            <!-- 氏名を部分一致で検索する -->
+            <label for="customerName">氏名検索</label>
 
-    <div>
-        <!-- 氏名を部分一致で検索する -->
-        <label for="customerName">氏名検索</label>
-
-        <input
-                type="text"
-                id="customerName"
-                name="customerName"
-                th:value="${customerName}"
-                placeholder="氏名を入力"
-        >
-    </div>
-
-    <div>
-        <!-- 予約希望日を指定して検索する -->
-        <label for="preferredDate">予約希望日検索</label>
-
-        <input
-                type="date"
-                id="preferredDate"
-                name="preferredDate"
-                th:value="${preferredDate}"
-        >
-    </div>
-
-    <div>
-        <!-- 予約希望日の並び順を指定する -->
-        <label for="order">並び順</label>
-
-        <select id="order" name="order">
-
-            <option
-                    value="asc"
-                    th:selected="${order == null or order == 'asc'}"
+            <input
+                    type="text"
+                    id="customerName"
+                    name="customerName"
+                    th:value="${customerName}"
+                    placeholder="氏名を入力"
             >
-                予約希望日の近い順
-            </option>
+        </div>
 
-            <option
-                    value="desc"
-                    th:selected="${order == 'desc'}"
+        <div>
+            <!-- 予約希望日を指定して検索する -->
+            <label for="preferredDate">予約希望日検索</label>
+
+            <input
+                    type="date"
+                    id="preferredDate"
+                    name="preferredDate"
+                    th:value="${preferredDate}"
             >
-                予約希望日の遠い順
-            </option>
+        </div>
 
-        </select>
-    </div>
+        <div>
+            <!-- 予約希望日の並び順を指定する -->
+            <label for="order">並び順</label>
 
-    <div>
-        <!-- 指定した条件で検索・並び替えを行う -->
-        <button type="submit">検索・並び替え</button>
-    </div>
+            <select id="order" name="order">
 
-</form>
+                <option
+                        value="asc"
+                        th:selected="${order == null or order == 'asc'}"
+                >
+                    予約希望日の近い順
+                </option>
 
-<!-- 検索条件をすべて解除して予約一覧を表示する -->
-<p>
-    <a th:href="@{/admin/reservations}">検索条件をクリア</a>
-</p>
+                <option
+                        value="desc"
+                        th:selected="${order == 'desc'}"
+                >
+                    予約希望日の遠い順
+                </option>
+
+            </select>
+        </div>
+
+        <div>
+            <!-- 指定した条件で検索・並び替えを行う -->
+            <button type="submit">検索・並び替え</button>
+        </div>
+
+    </form>
+
+    <!-- 検索条件をすべて解除して予約一覧を表示する -->
+    <p>
+        <a th:href="@{/admin/reservations}">検索条件をクリア</a>
+    </p>
 
 
-<!-- 予約が1件もない場合に表示する -->
-<p th:if="${#lists.isEmpty(reservations)}">
-    予約情報はありません。
-</p>
+    <!-- 予約が1件もない場合に表示する -->
+    <p th:if="${#lists.isEmpty(reservations)}">
+        予約情報はありません。
+    </p>
 
-<!-- 予約がある場合に一覧を表示する -->
-<table th:if="${!#lists.isEmpty(reservations)}" border="1">
+    <!-- 予約がある場合に一覧を表示する -->
+    <table th:if="${!#lists.isEmpty(reservations)}" border="1">
 
-    <thead>
-    <tr>
-        <th>氏名</th>
-        <th>人数</th>
-        <th>予約希望日</th>
-        <th>電話番号</th>
-        <th>メールアドレス</th>
-        <th>備考</th>
-        <th>操作</th>
-    </tr>
-    </thead>
+        <thead>
+        <tr>
+            <th>氏名</th>
+            <th>人数</th>
+            <th>予約希望日</th>
+            <th>電話番号</th>
+            <th>メールアドレス</th>
+            <th>備考</th>
+            <th>操作</th>
+        </tr>
+        </thead>
 
-    <tbody>
+        <tbody>
 
-    <!-- reservationsの中身を1件ずつreservationとして取り出す -->
-    <tr th:each="reservation : ${reservations}">
-        <td th:text="${reservation.customerName}"></td>
+        <!-- reservationsの中身を1件ずつreservationとして取り出す -->
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.customerName}"></td>
 
-        <td>
-            <span th:text="${reservation.numberOfPeople}"></span>
-            人
-        </td>
+            <td>
+                <span th:text="${reservation.numberOfPeople}"></span>
+                人
+            </td>
 
-        <td th:text="${reservation.preferredDate}"></td>
+            <td th:text="${reservation.preferredDate}"></td>
 
-        <td th:text="${reservation.phoneNumber}"></td>
+            <td th:text="${reservation.phoneNumber}"></td>
 
-        <td th:text="${reservation.email}"></td>
+            <td th:text="${reservation.email}"></td>
 
-        <td th:text="${reservation.remarks}"></td>
+            <td th:text="${reservation.remarks}"></td>
 
-        <td>
-            <!-- 予約IDをURLに含めて詳細画面へ移動する -->
-            <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
-                詳細
-            </a>
-        </td>
-    </tr>
+            <td>
+                <!-- 予約IDをURLに含めて詳細画面へ移動する -->
+                <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
+                    詳細
+                </a>
+            </td>
+        </tr>
 
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
-<p>
-    <a th:href="@{/reservations/new}">新しい予約を登録する</a>
-</p>
-
+    <p>
+        <a th:href="@{/reservations/new}">新しい予約を登録する</a>
+    </p>
+</div>
 </body>
 </html>

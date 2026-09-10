@@ -3,68 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>予約詳細</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
+<div class="container">
+    <h1>予約詳細</h1>
 
-<h1>予約詳細</h1>
+    <!-- 予約者の氏名を表示する -->
+    <p>
+        氏名：
+        <span th:text="${reservation.customerName}"></span>
+    </p>
 
-<!-- 予約者の氏名を表示する -->
-<p>
-    氏名：
-    <span th:text="${reservation.customerName}"></span>
-</p>
+    <!-- 予約人数を表示する -->
+    <p>
+        人数：
+        <span th:text="${reservation.numberOfPeople}"></span>
+        人
+    </p>
 
-<!-- 予約人数を表示する -->
-<p>
-    人数：
-    <span th:text="${reservation.numberOfPeople}"></span>
-    人
-</p>
+    <!-- 予約希望日を表示する -->
+    <p>
+        予約希望日：
+        <span th:text="${reservation.preferredDate}"></span>
+    </p>
 
-<!-- 予約希望日を表示する -->
-<p>
-    予約希望日：
-    <span th:text="${reservation.preferredDate}"></span>
-</p>
+    <!-- 電話番号を表示する -->
+    <p>
+        電話番号：
+        <span th:text="${reservation.phoneNumber}"></span>
+    </p>
 
-<!-- 電話番号を表示する -->
-<p>
-    電話番号：
-    <span th:text="${reservation.phoneNumber}"></span>
-</p>
+    <!-- メールアドレスを表示する -->
+    <p>
+        メールアドレス：
+        <span th:text="${reservation.email}"></span>
+    </p>
 
-<!-- メールアドレスを表示する -->
-<p>
-    メールアドレス：
-    <span th:text="${reservation.email}"></span>
-</p>
+    <!-- 備考を表示する -->
+    <p>
+        備考：
+        <span th:text="${reservation.remarks}"></span>
+    </p>
 
-<!-- 備考を表示する -->
-<p>
-    備考：
-    <span th:text="${reservation.remarks}"></span>
-</p>
+    <!-- 現在表示している予約のIDを使って編集画面へ移動する -->
+    <p>
+        <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}">
+            編集する
+        </a>
+    </p>
 
-<!-- 現在表示している予約のIDを使って編集画面へ移動する -->
-<p>
-    <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}">
-        編集する
-    </a>
-</p>
+    <!-- 現在表示している予約を削除する -->
+    <form th:action="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
+          method="post"
+          onsubmit="return confirm('この予約を削除してもよろしいですか？');">
 
-<!-- 現在表示している予約を削除する -->
-<form th:action="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
-      method="post"
-      onsubmit="return confirm('この予約を削除してもよろしいですか？');">
+        <button type="submit">削除する</button>
+    </form>
 
-    <button type="submit">削除する</button>
-</form>
-
-<!-- 予約一覧画面へ戻る -->
-<p>
-    <a th:href="@{/admin/reservations}">予約一覧に戻る</a>
-</p>
-
+    <!-- 予約一覧画面へ戻る -->
+    <p>
+        <a th:href="@{/admin/reservations}">予約一覧に戻る</a>
+    </p>
+</div>
 </body>
 </html>

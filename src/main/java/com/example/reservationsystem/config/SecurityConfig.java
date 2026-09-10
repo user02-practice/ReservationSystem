@@ -25,7 +25,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/reservations/new",
                                 "/reservations",
-                                "/error"
+                                "/error",
+                                "/css/**"
                         ).permitAll()
 
                         // 管理者用画面はADMIN権限を持つユーザーだけアクセス可能
