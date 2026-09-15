@@ -69,10 +69,21 @@ a {
     text-decoration: none;
 }
 
-.error{
-    color: red;
+.error {
+    color: #d32f2f;
+    font-weight: bold;
+    margin-top: 6px;
 }
 
 .actions {
     margin-top: 20px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
 }

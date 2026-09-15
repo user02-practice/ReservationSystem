@@ -87,17 +87,18 @@
     </p>
 
     <!-- 予約がある場合に一覧を表示する -->
-    <table th:if="${!#lists.isEmpty(reservations)}" border="1">
+    <div class="table-wrapper" th:if="${!#lists.isEmpty(reservations)}">
 
+        <table border="1">
         <thead>
         <tr>
-            <th>氏名</th>
-            <th>人数</th>
-            <th>予約希望日</th>
+            <th class="nowrap">氏名</th>
+            <th class="nowrap">人数</th>
+            <th class="nowrap">予約希望日</th>
             <th>電話番号</th>
             <th>メールアドレス</th>
             <th>備考</th>
-            <th>操作</th>
+            <th class="nowrap">操作</th>
         </tr>
         </thead>
 
@@ -105,20 +106,18 @@
 
         <!-- reservationsの中身を1件ずつreservationとして取り出す -->
         <tr th:each="reservation : ${reservations}">
-            <td th:text="${reservation.customerName}"></td>
-
-            <td>
-                <span th:text="${reservation.numberOfPeople}"></span>
-                人
-            </td>
-
-            <td th:text="${reservation.preferredDate}"></td>
+            <td class="nowrap" th:text="${reservation.customerName}"></td>
+            <td class="nowrap" th:text="${reservation.numberOfPeople + '人'}"></td>
+            <td class="nowrap" th:text="${reservation.preferredDate}"></td>
 
             <td th:text="${reservation.phoneNumber}"></td>
 
             <td th:text="${reservation.email}"></td>
 
-            <td th:text="${reservation.remarks}"></td>
+            <td th:text="${reservation.remarks != null && reservation.remarks.length() > 20
+        ? reservation.remarks.substring(0, 20) + '…'
+        : reservation.remarks}">
+            </td>
 
             <td>
                 <!-- 予約IDをURLに含めて詳細画面へ移動する -->
@@ -130,7 +129,9 @@
 
         </tbody>
 
-    </table>
+        </table>
+
+    </div>
 
     <p>
         <a th:href="@{/reservations/new}">新しい予約を登録する</a>
