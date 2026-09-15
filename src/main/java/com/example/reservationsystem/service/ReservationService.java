@@ -73,18 +73,24 @@ public class ReservationService {
 
         List<Reservation> reservations;
 
-        // まず並び順に応じて全予約を取得する
+        // 並び順に応じて全予約を取得する
         if ("desc".equals(order)) {
 
-            // 予約希望日の遠い順で取得する
+            // 予約希望日の遠い順
             reservations =
                     reservationRepository.findAllByOrderByPreferredDateDesc();
 
-        } else {
+        } else if ("asc".equals(order)) {
 
-            // 予約希望日の近い順で取得する
+            // 予約希望日の近い順
             reservations =
                     reservationRepository.findAllByOrderByPreferredDateAsc();
+
+        } else {
+
+            // IDの若い順（予約を受け付けた順）
+            reservations =
+                    reservationRepository.findAllByOrderByIdAsc();
         }
 
         // 氏名が入力されている場合は部分一致で絞り込む

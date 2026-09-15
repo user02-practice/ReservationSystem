@@ -27,6 +27,8 @@ public interface ReservationRepository
     // 予約希望日が遠い順（降順）で予約一覧を取得する
     List<Reservation> findAllByOrderByPreferredDateDesc();
 
+    // IDの若い順（予約を受け付けた順）で取得する
+    List<Reservation> findAllByOrderByIdAsc();
 
 
 }

@@ -45,8 +45,15 @@
             <select id="order" name="order">
 
                 <option
+                        value="id"
+                        th:selected="${order == 'id'}"
+                >
+                    予約受付順
+                </option>
+
+                <option
                         value="asc"
-                        th:selected="${order == null or order == 'asc'}"
+                        th:selected="${order == 'asc'}"
                 >
                     予約希望日の近い順
                 </option>

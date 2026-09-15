@@ -92,7 +92,7 @@ public class ReservationController {
     public String showReservationList(
             @RequestParam(required = false) String customerName,
             @RequestParam(required = false) String preferredDate,
-            @RequestParam(defaultValue = "asc") String order,
+            @RequestParam(defaultValue = "id") String order,
             Model model) {
 
         // 予約希望日を格納する変数
