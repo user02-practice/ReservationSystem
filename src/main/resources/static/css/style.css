@@ -132,3 +132,8 @@ a {
 .logout-toast.fade-out {
     opacity: 0;
 }
+
+/* 長い備考を画面内で折り返す */
+.remarks-text {
+    overflow-wrap: anywhere;
+}

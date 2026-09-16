@@ -10,13 +10,9 @@
 <div class="container">
     <h1>予約一覧</h1>
 
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">ログアウト</button>
-    </form>
 
     <!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
-    <form th:action="@{/admin/reservations}" method="get">
-
+    <form th:action="@{/admin/reservations#reservation-list}" method="get">
         <div>
             <!-- 氏名を部分一致で検索する -->
             <label for="customerName">氏名検索</label>
@@ -84,6 +80,8 @@
         <a th:href="@{/admin/reservations}">検索条件をクリア</a>
     </p>
 
+    <!-- 検索・並び替え後にこの位置へ移動する -->
+    <div id="reservation-list"></div>
 
     <!-- 予約が1件もない場合に表示する -->
     <p th:if="${#lists.isEmpty(reservations)}">
@@ -92,7 +90,6 @@
 
     <!-- 予約がある場合に一覧を表示する -->
     <div class="table-wrapper" th:if="${!#lists.isEmpty(reservations)}">
-
         <table border="1">
         <thead>
         <tr>
@@ -137,9 +134,14 @@
 
     </div>
 
-    <p>
-        <a th:href="@{/reservations/new}">新しい予約を登録する</a>
-    </p>
+<!-- 管理者ログアウト -->
+<div class="actions">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
+</div>
+
 </div>
 </body>
 </html>
+
