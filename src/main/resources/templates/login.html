@@ -17,6 +17,11 @@
         ユーザー名またはパスワードが正しくありません。
     </p>
 
+    <!-- ログアウトした場合のメッセージ -->
+    <p class="success" th:if="${param.logout}">
+        ログアウトしました。
+    </p>
+
     <form th:action="@{/login}" method="post">
 
         <div>

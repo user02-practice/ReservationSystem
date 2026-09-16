@@ -10,6 +10,10 @@
 <div class="container">
     <h1>予約一覧</h1>
 
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
+
     <!-- 氏名・予約希望日・並び順を指定して予約を検索する -->
     <form th:action="@{/admin/reservations}" method="get">
 

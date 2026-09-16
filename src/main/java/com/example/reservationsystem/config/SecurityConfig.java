@@ -47,6 +47,7 @@ public class SecurityConfig {
 
                 // ログアウト機能を有効にする
                 .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );
 
