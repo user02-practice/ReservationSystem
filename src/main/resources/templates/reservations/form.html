@@ -10,7 +10,11 @@
 <div class="container">
     <h1>予約登録</h1>
 
-    <form th:action="@{/reservations}" th:object="${reservation}" method="post">
+    <form th:action="@{/reservations/confirm}"
+          th:object="${reservation}"
+          method="post">
+
+
         <div>
             <!-- 予約者の氏名を入力する -->
             <label for="customerName">氏名 ※必須</label>
@@ -117,8 +121,7 @@
         </div>
 
         <div>
-            <!-- 入力した予約情報を送信する -->
-            <button type="submit">予約する</button>
+            <button type="submit">入力内容を確認する</button>
         </div>
 
     </form>

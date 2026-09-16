@@ -57,6 +57,30 @@ public class ReservationController {
         return "reservations/form";
     }
 
+    // 予約フォームから送信された内容を確認する
+    @PostMapping("/reservations/confirm")
+    public String confirmReservation(
+            @Validated({Default.class, PublicReservation.class}) Reservation reservation,
+            BindingResult bindingResult) {
+
+        // 入力内容にエラーがある場合は、予約登録画面を再表示する
+        if (bindingResult.hasErrors()) {
+            return "reservations/form";
+        }
+
+        // 入力内容に問題がなければ、予約確認画面を表示する
+        return "reservations/confirm";
+    }
+
+    // 予約確認画面から入力画面へ戻る
+    @PostMapping("/reservations/edit")
+    public String editReservation(Reservation reservation) {
+
+        // 確認画面から受け取った予約情報を保持したまま、
+        // 予約入力画面を再表示する
+        return "reservations/form";
+    }
+
     // 予約フォームから送信された内容を受け取り、予約を登録する
     @PostMapping("/reservations")
     public String createReservation(

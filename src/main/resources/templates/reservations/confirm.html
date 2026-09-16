@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>予約内容確認</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>予約内容確認</h1>
+
+    <p>以下の内容で予約しますか？</p>
+
+    <!-- 入力された予約内容を表示する -->
+    <div>
+        <p>
+            <strong>氏名：</strong>
+            <span th:text="${reservation.customerName}"></span>
+        </p>
+
+        <p>
+            <strong>人数：</strong>
+            <span th:text="${reservation.numberOfPeople}"></span>人
+        </p>
+
+        <p>
+            <strong>予約希望日：</strong>
+            <span th:text="${reservation.preferredDate}"></span>
+        </p>
+
+        <p>
+            <strong>電話番号：</strong>
+            <span th:text="${reservation.phoneNumber}"></span>
+        </p>
+
+        <p>
+            <strong>メールアドレス：</strong>
+            <span th:text="${reservation.email}"></span>
+        </p>
+
+        <p>
+            <strong>備考：</strong>
+            <span class="remarks-text"
+                  th:text="${reservation.remarks}"></span>
+        </p>
+    </div>
+
+
+    <!-- この内容で予約を確定する -->
+    <form th:action="@{/reservations}"
+          th:object="${reservation}"
+          method="post">
+
+        <!-- 予約情報を登録処理へ渡す -->
+        <input type="hidden" th:field="*{customerName}">
+        <input type="hidden" th:field="*{numberOfPeople}">
+        <input type="hidden" th:field="*{preferredDate}">
+        <input type="hidden" th:field="*{phoneNumber}">
+        <input type="hidden" th:field="*{email}">
+        <input type="hidden" th:field="*{remarks}">
+
+        <button type="submit">この内容で予約する</button>
+
+    </form>
+
+
+    <!-- 入力内容を保持したまま予約入力画面へ戻る -->
+    <form th:action="@{/reservations/edit}"
+          th:object="${reservation}"
+          method="post"
+          style="margin-top: 20px;">
+
+        <!-- 予約情報を入力画面へ戻すために保持する -->
+        <input type="hidden" th:field="*{customerName}">
+        <input type="hidden" th:field="*{numberOfPeople}">
+        <input type="hidden" th:field="*{preferredDate}">
+        <input type="hidden" th:field="*{phoneNumber}">
+        <input type="hidden" th:field="*{email}">
+        <input type="hidden" th:field="*{remarks}">
+
+        <button type="submit">修正する</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

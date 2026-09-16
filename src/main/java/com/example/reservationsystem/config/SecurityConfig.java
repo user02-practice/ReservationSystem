@@ -25,6 +25,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/reservations/new",
                                 "/reservations",
+                                "/reservations/confirm",
+                                "/reservations/edit",
                                 "/error",
                                 "/css/**"
                         ).permitAll()
