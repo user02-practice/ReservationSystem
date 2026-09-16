@@ -87,3 +87,18 @@ a {
     width: 100%;
     overflow-x: auto;
 }
+
+.login-container {
+    max-width: 500px;
+}
+
+/* 管理者ログイン画面 */
+.login-container {
+    max-width: 500px;
+}
+
+.login-button {
+    width: 100%;
+    max-width: 400px;
+    font-weight: bold;
+}

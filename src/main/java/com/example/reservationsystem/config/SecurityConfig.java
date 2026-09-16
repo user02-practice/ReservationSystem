@@ -38,8 +38,10 @@ public class SecurityConfig {
                         .authenticated()
                 )
 
-                // Spring Security標準のログイン画面を使用する
+                // 自作のログイン画面を使用する
                 .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/admin/reservations", true)
                         .permitAll()
                 )
 
