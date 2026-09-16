@@ -18,8 +18,8 @@
     </p>
 
     <!-- ログアウトした場合のメッセージ -->
-    <p class="success" th:if="${param.logout}">
-        ログアウトしました。
+    <p class="logout-toast" id="logout-message" th:if="${param.logout}">
+        ✓ ログアウトしました
     </p>
 
     <form th:action="@{/login}" method="post">
@@ -45,11 +45,18 @@
 
     </form>
 
-    <div class="actions">
-        <a th:href="@{/reservations/new}">予約登録画面へ戻る</a>
-    </div>
-
 </div>
+<script>
+    setTimeout(() => {
+        const message = document.getElementById("logout-message");
 
+        if (message) {
+            message.classList.add("fade-out");
+
+            // URLから「?logout」を削除する
+            window.history.replaceState({}, "", "/login");
+        }
+    }, 2500);
+</script>
 </body>
 </html>

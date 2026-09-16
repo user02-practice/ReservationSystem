@@ -111,3 +111,24 @@ a {
     max-width: 400px;
     box-sizing: border-box;
 }
+
+/* ログアウト完了通知 */
+.logout-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 180px;
+    transform: translateX(-50%);
+
+    background-color: #e8f5e9;
+    border: 1px solid #81c784;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.logout-toast.fade-out {
+    opacity: 0;
+}
