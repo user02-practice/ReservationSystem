@@ -36,13 +36,15 @@
             <!-- 予約人数を入力する -->
             <label for="numberOfPeople">人数 ※必須</label>
 
-            <input
-                    type="number"
-                    id="numberOfPeople"
-                    th:field="*{numberOfPeople}"
-                    min="1"
-            >
-            <span>人</span>
+            <div class="number-input-wrapper">
+                <input
+                        type="number"
+                        id="numberOfPeople"
+                        th:field="*{numberOfPeople}"
+                        min="1"
+                >
+                <span class="number-unit">人</span>
+            </div>
 
             <!-- 人数に入力エラーがある場合にメッセージを表示する -->
             <p class="error"

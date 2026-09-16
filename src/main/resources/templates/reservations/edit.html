@@ -36,16 +36,18 @@
             <!-- 予約人数 -->
             <label for="numberOfPeople">人数 ※必須</label>
 
-            <input
-                    type="number"
-                    id="numberOfPeople"
-                    th:field="*{numberOfPeople}"
-                    min="1"
-            >
-            <span>人</span>
+            <div class="number-input-wrapper">
+                <input
+                        type="number"
+                        id="numberOfPeople"
+                        th:field="*{numberOfPeople}"
+                        min="1"
+                >
+                <span class="number-unit">人</span>
+            </div>
 
-            <!-- 人数に入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('numberOfPeople')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('numberOfPeople')}"
                th:errors="*{numberOfPeople}">
             </p>
         </div>

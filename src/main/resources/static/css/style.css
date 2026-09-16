@@ -83,6 +83,25 @@ a {
     white-space: nowrap;
 }
 
+/* 人数入力欄の単位を入力欄内に表示する */
+.number-input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.number-input-wrapper input {
+    padding-right: 45px;
+}
+
+.number-unit {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
