@@ -5,6 +5,8 @@ import com.example.reservationsystem.entity.Reservation;
 
 // GETリクエストを受け取るために使用する
 import com.example.reservationsystem.service.MailService;
+import com.example.reservationsystem.validation.PublicReservation;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
 // HTMLへデータを渡すために使用する
@@ -21,7 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import jakarta.validation.groups.Default;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -58,7 +60,7 @@ public class ReservationController {
     // 予約フォームから送信された内容を受け取り、予約を登録する
     @PostMapping("/reservations")
     public String createReservation(
-            @Valid Reservation reservation,
+            @Validated({Default.class, PublicReservation.class}) Reservation reservation,
             BindingResult bindingResult,
             Model model) {
 
@@ -84,6 +86,37 @@ public class ReservationController {
 
         // 予約完了画面を表示する
         return "reservations/complete";
+    }
+
+
+    // 管理者用の予約追加画面を表示する
+    @GetMapping("/admin/reservations/new")
+    public String showAdminReservationForm(Model model) {
+
+        // 空のReservationオブジェクトを作成し、
+        // 管理者用の予約追加フォームで使用できるようにする
+        model.addAttribute("reservation", new Reservation());
+
+        // 管理者用の予約追加画面を表示する
+        return "reservations/admin-form";
+    }
+
+    // 管理者が入力した予約情報を登録する
+    @PostMapping("/admin/reservations")
+    public String createAdminReservation(
+            @Valid Reservation reservation,
+            BindingResult bindingResult) {
+
+        // 入力内容にエラーがある場合は予約追加画面に戻る
+        if (bindingResult.hasErrors()) {
+            return "reservations/admin-form";
+        }
+
+        // 予約情報をデータベースに保存する
+        reservationService.saveReservation(reservation);
+
+        // 予約一覧画面へ戻る
+        return "redirect:/admin/reservations";
     }
 
     // 予約一覧を表示する

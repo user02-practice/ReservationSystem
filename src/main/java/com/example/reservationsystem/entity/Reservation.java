@@ -1,6 +1,7 @@
 package com.example.reservationsystem.entity;
 
 // JPAでEntityを扱うために使用する
+import com.example.reservationsystem.validation.PublicReservation;
 import jakarta.persistence.*;
 
 // 入力値が空欄ではないことをチェックするために使用する
@@ -42,14 +43,23 @@ public class Reservation {
     private LocalDate preferredDate;
 
     // 予約者の電話番号
-    // 電話番号は必須入力とする
-    // 海外の電話番号にも対応するため、形式については厳密なチェックを行わない
-    @NotBlank(message = "電話番号を入力してください")
+// 利用者から予約する場合は必須入力とする
+// 管理者から登録・編集する場合は任意入力とする
+// 海外の電話番号にも対応するため、形式については厳密なチェックを行わない
+    @NotBlank(
+            message = "電話番号を入力してください",
+            groups = PublicReservation.class
+    )
     private String phoneNumber;
 
     // 予約者のメールアドレス
-    // 必須入力とし、メールアドレスの形式もチェックする
-    @NotBlank(message = "メールアドレスを入力してください")
+// 利用者から予約する場合は必須入力とする
+// 管理者から登録・編集する場合は任意入力とする
+// 入力されている場合はメールアドレスの形式をチェックする
+    @NotBlank(
+            message = "メールアドレスを入力してください",
+            groups = PublicReservation.class
+    )
     @Email(message = "メールアドレスの形式が正しくありません")
     private String email;
 
