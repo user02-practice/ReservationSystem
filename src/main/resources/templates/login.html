@@ -84,7 +84,14 @@
             message.classList.add("fade-out");
 
             // URLから「?logout」を削除する
-            window.history.replaceState({}, "", "/login");
+            const url = new URL(window.location.href);
+            url.searchParams.delete("logout");
+
+            window.history.replaceState(
+                {},
+                "",
+                url.pathname + url.search + url.hash
+            );
         }
     }, 2500);
 </script>
