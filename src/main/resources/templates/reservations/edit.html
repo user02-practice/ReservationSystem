@@ -27,7 +27,8 @@
             >
 
             <!-- 氏名に入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('customerName')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('customerName')}"
                th:errors="*{customerName}">
             </p>
         </div>
@@ -63,7 +64,8 @@
             >
 
             <!-- 予約希望日に入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('preferredDate')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('preferredDate')}"
                th:errors="*{preferredDate}">
             </p>
         </div>
@@ -71,6 +73,7 @@
         <div>
             <!-- 電話番号 -->
             <label for="phoneNumber">電話番号（任意）</label>
+
             <input
                     type="tel"
                     id="phoneNumber"
@@ -78,7 +81,8 @@
             >
 
             <!-- 電話番号に入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('phoneNumber')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('phoneNumber')}"
                th:errors="*{phoneNumber}">
             </p>
         </div>
@@ -86,6 +90,7 @@
         <div>
             <!-- メールアドレス -->
             <label for="email">メールアドレス（任意）</label>
+
             <input
                     type="email"
                     id="email"
@@ -93,7 +98,8 @@
             >
 
             <!-- メールアドレスに入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('email')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('email')}"
                th:errors="*{email}">
             </p>
         </div>
@@ -110,24 +116,28 @@
             ></textarea>
 
             <!-- 備考に入力エラーがある場合に表示する -->
-            <p th:if="${#fields.hasErrors('remarks')}"
+            <p class="error"
+               th:if="${#fields.hasErrors('remarks')}"
                th:errors="*{remarks}">
             </p>
         </div>
 
-        <div>
-            <!-- 編集した予約情報を送信する -->
-            <button type="submit">変更を保存する</button>
+        <!-- 予約編集画面の操作 -->
+        <div class="edit-actions">
+
+            <button type="submit" class="save-button">
+                変更を保存する
+            </button>
+
+            <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}"
+               class="back-detail-button">
+                予約詳細に戻る
+            </a>
+
         </div>
 
     </form>
 
-    <!-- 変更せず予約詳細画面へ戻る -->
-    <p>
-        <a th:href="@{/admin/reservations/{id}(id=${reservation.id})}">
-            予約詳細に戻る
-        </a>
-    </p>
 </div>
 </body>
 </html>

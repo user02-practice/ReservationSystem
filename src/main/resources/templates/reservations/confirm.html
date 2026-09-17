@@ -49,41 +49,48 @@
     </div>
 
 
-    <!-- この内容で予約を確定する -->
-    <form th:action="@{/reservations}"
-          th:object="${reservation}"
-          method="post">
+    <div class="confirm-actions">
 
-        <!-- 予約情報を登録処理へ渡す -->
-        <input type="hidden" th:field="*{customerName}">
-        <input type="hidden" th:field="*{numberOfPeople}">
-        <input type="hidden" th:field="*{preferredDate}">
-        <input type="hidden" th:field="*{phoneNumber}">
-        <input type="hidden" th:field="*{email}">
-        <input type="hidden" th:field="*{remarks}">
+        <!-- この内容で予約を確定する -->
+        <form th:action="@{/reservations}"
+              th:object="${reservation}"
+              method="post">
 
-        <button type="submit">この内容で予約する</button>
+            <!-- 予約情報を登録処理へ渡す -->
+            <input type="hidden" th:field="*{customerName}">
+            <input type="hidden" th:field="*{numberOfPeople}">
+            <input type="hidden" th:field="*{preferredDate}">
+            <input type="hidden" th:field="*{phoneNumber}">
+            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{remarks}">
 
-    </form>
+            <button type="submit" class="confirm-button">
+                この内容で予約する
+            </button>
+
+        </form>
 
 
-    <!-- 入力内容を保持したまま予約入力画面へ戻る -->
-    <form th:action="@{/reservations/edit}"
-          th:object="${reservation}"
-          method="post"
-          style="margin-top: 20px;">
+        <!-- 入力内容を保持したまま予約入力画面へ戻る -->
+        <form th:action="@{/reservations/edit}"
+              th:object="${reservation}"
+              method="post">
 
-        <!-- 予約情報を入力画面へ戻すために保持する -->
-        <input type="hidden" th:field="*{customerName}">
-        <input type="hidden" th:field="*{numberOfPeople}">
-        <input type="hidden" th:field="*{preferredDate}">
-        <input type="hidden" th:field="*{phoneNumber}">
-        <input type="hidden" th:field="*{email}">
-        <input type="hidden" th:field="*{remarks}">
+            <!-- 予約情報を入力画面へ戻すために保持する -->
+            <input type="hidden" th:field="*{customerName}">
+            <input type="hidden" th:field="*{numberOfPeople}">
+            <input type="hidden" th:field="*{preferredDate}">
+            <input type="hidden" th:field="*{phoneNumber}">
+            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{remarks}">
 
-        <button type="submit">修正する</button>
+            <button type="submit" class="edit-button">
+                修正する
+            </button>
 
-    </form>
+        </form>
+
+    </div>
 
 </div>
 

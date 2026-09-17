@@ -104,7 +104,10 @@ a {
 
 .table-wrapper {
     width: 100%;
+    max-width: 898px;
+    margin: 40px auto 0;
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 .login-container {
@@ -155,4 +158,417 @@ a {
 /* 長い備考を画面内で折り返す */
 .remarks-text {
     overflow-wrap: anywhere;
+}
+
+.add-reservation-button {
+    display: inline-block;
+    width: 180px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 12px 24px;
+    background-color: #6f42c1;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.add-reservation-button:hover {
+    background-color: #59359a;
+}
+
+/* 検索・並び替えボタン */
+.search-button {
+    padding: 12px 24px;
+    background-color: #6f42c1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    transition: 0.2s;
+    width: 180px;
+    box-sizing: border-box;
+}
+
+.search-button:hover {
+    background-color: #59359a;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   管理画面
+   ========================= */
+
+/* 検索エリア */
+.search-panel {
+    background-color: #f8f7fc;
+    padding: 24px;
+    border: 1px solid #e5e0f0;
+    border-radius: 12px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* 検索条件をクリア */
+.clear-button {
+    display: inline-block;
+    padding: 10px 16px;
+    color: #6f42c1;
+    background-color: white;
+    border: 1px solid #6f42c1;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.clear-button:hover {
+    background-color: #f3eefc;
+}
+
+/* 詳細ボタン */
+.detail-button {
+    display: inline-block;
+    width: 90px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+
+    color: #6f42c1;
+    background-color: white;
+
+    border: 1px solid #6f42c1;
+    border-radius: 8px;
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+.detail-button:hover {
+    color: white;
+    background-color: #6f42c1;
+}
+
+/* ログアウト */
+.logout-button {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.logout-button:hover {
+    background-color: #e8e8e8;
+}
+
+.search-layout {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 60px;
+}
+
+.search-fields {
+    width: 500px;
+    flex: none;
+}
+
+.search-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 予約一覧テーブル */
+.table-wrapper table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e5e0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 見出し */
+.table-wrapper th {
+    background-color: #f3eefc;
+    padding: 14px;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #e5e0f0;
+}
+
+/* 予約データ */
+.table-wrapper td {
+    padding: 14px;
+    border: none;
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* 最後の行は下線を消す */
+.table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 行にマウスを乗せたとき */
+.table-wrapper tbody tr:hover {
+    background-color: #faf8fd;
+}
+
+.admin-header {
+    display: grid;
+    grid-template-columns: 500px 180px;
+    column-gap: 60px;
+    align-items: center;
+
+    max-width: 850px;
+    margin: 0 auto 30px;
+    padding: 0 24px;
+    box-sizing: content-box;
+}
+
+.admin-header h1 {
+    margin: 0;
+}
+
+.actions {
+    max-width: 850px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    box-sizing: content-box;
+}
+
+.confirm-button {
+    width: auto;
+    white-space: nowrap;
+}
+
+/* 予約確認画面のボタン */
+.confirm-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.confirm-button,
+.edit-button {
+    padding: 12px 24px;
+    background-color: #6f42c1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.confirm-button:hover,
+.edit-button:hover {
+    background-color: #59359a;
+}
+
+/* 予約完了画面 */
+.back-to-form-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #6f42c1;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+.back-to-form-button:hover {
+    background-color: #59359a;
+}
+
+/* =========================
+   予約詳細画面
+   ========================= */
+
+.detail-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.detail-actions form {
+    margin: 0;
+}
+
+/* 編集 */
+.edit-reservation-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #6f42c1;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit-reservation-button:hover {
+    background-color: #59359a;
+}
+
+/* 削除 */
+.delete-reservation-button {
+    padding: 12px 24px;
+    background-color: white;
+    color: #d32f2f;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #d32f2f;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.delete-reservation-button:hover {
+    background-color: #fff0f0;
+}
+
+/* 一覧へ戻る */
+.back-list-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: white;
+    color: #6f42c1;
+    font-weight: bold;
+    border: 1px solid #6f42c1;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.back-list-button:hover {
+    background-color: #f3eefc;
+}
+
+/* 予約編集画面の操作ボタン */
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.save-button,
+.back-detail-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 変更を保存する */
+.save-button {
+    background-color: #6f42c1;
+    color: white;
+    border: 1px solid #6f42c1;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.save-button:hover {
+    background-color: #59359a;
+}
+
+/* 予約詳細に戻る */
+.back-detail-button {
+    background-color: white;
+    color: #6f42c1;
+    border: 1px solid #6f42c1;
+    text-decoration: none;
+}
+
+.back-detail-button:hover {
+    background-color: #f3eefc;
+}
+
+/* 管理者予約追加画面の操作ボタン */
+.admin-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+}
+
+.admin-save-button,
+.admin-back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 予約を追加する */
+.admin-save-button {
+    background-color: #6f42c1;
+    color: white;
+    border: 1px solid #6f42c1;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.admin-save-button:hover {
+    background-color: #59359a;
+}
+
+/* 予約一覧に戻る */
+.admin-back-button {
+    background-color: white;
+    color: #6f42c1;
+    border: 1px solid #6f42c1;
+    text-decoration: none;
+}
+
+.admin-back-button:hover {
+    background-color: #f3eefc;
+}
+
+/* パスワード表示 */
+.show-password {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.show-password input {
+    width: auto;
+    margin: 0;
 }

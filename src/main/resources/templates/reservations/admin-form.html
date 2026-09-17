@@ -98,12 +98,13 @@
 
         <!-- 予約に関する備考 -->
         <div>
-            <label for="remarks">備考（任意）</label>
+            <label for="remarks">備考（任意・100文字以内）</label>
 
             <textarea
                     id="remarks"
                     th:field="*{remarks}"
                     maxlength="100"
+                    placeholder="お目当てのアーティスト等"
             ></textarea>
 
             <p class="error"
@@ -112,20 +113,22 @@
             </p>
         </div>
 
-        <!-- 入力した予約情報を登録する -->
-        <div>
-            <button type="submit">予約を登録する</button>
-        </div>
+        <!-- 管理者予約追加画面の操作 -->
+        <div class="admin-form-actions">
 
+            <button type="submit" class="admin-save-button">
+                予約を追加する
+            </button>
+
+            <a th:href="@{/admin/reservations}"
+               class="admin-back-button">
+                予約一覧に戻る
+            </a>
+
+        </div>
 
     </form>
 
-    <!-- 予約一覧画面へ戻る -->
-    <div class="actions">
-        <a th:href="@{/admin/reservations}">予約一覧へ戻る</a>
-    </div>
-
 </div>
-
 </body>
 </html>

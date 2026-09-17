@@ -29,24 +29,54 @@
             <input type="text"
                    id="username"
                    name="username"
-                   autofocus>
+                   autofocus
+                   onclick="this.select()">
         </div>
 
         <div>
             <label for="password">パスワード</label>
             <input type="password"
                    id="password"
-                   name="password">
+                   name="password"
+                   onclick="this.select()">
+
+            <label class="show-password">
+                <input type="checkbox" id="show-password">
+                パスワードを表示
+            </label>
         </div>
 
         <div>
-            <button type="submit" class="login-button">ログイン</button>
+            <button type="submit" class="login-button">
+                ログイン
+            </button>
         </div>
 
     </form>
 
 </div>
+
 <script>
+
+    const username = document.getElementById("username");
+    let firstUsernameInput = true;
+
+    username.addEventListener("beforeinput", (event) => {
+        if (firstUsernameInput && event.inputType === "insertText") {
+            username.value = "";
+            firstUsernameInput = false;
+        }
+    });
+
+    // パスワードの表示・非表示を切り替える
+    const password = document.getElementById("password");
+    const showPassword = document.getElementById("show-password");
+
+    showPassword.addEventListener("change", () => {
+        password.type = showPassword.checked ? "text" : "password";
+    });
+
+    // ログアウトメッセージを一定時間後に消す
     setTimeout(() => {
         const message = document.getElementById("logout-message");
 
@@ -58,5 +88,6 @@
         }
     }, 2500);
 </script>
+
 </body>
 </html>

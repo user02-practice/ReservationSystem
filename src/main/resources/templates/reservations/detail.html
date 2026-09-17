@@ -47,25 +47,32 @@
         <span class="remarks-text" th:text="${reservation.remarks}"></span>
     </p>
 
-    <!-- 現在表示している予約のIDを使って編集画面へ移動する -->
-    <p>
-        <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}">
+    <!-- 予約に対する操作 -->
+    <div class="detail-actions">
+
+        <!-- 現在表示している予約のIDを使って編集画面へ移動する -->
+        <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}"
+           class="edit-reservation-button">
             編集する
         </a>
-    </p>
 
-    <!-- 現在表示している予約を削除する -->
-    <form th:action="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
-          method="post"
-          onsubmit="return confirm('この予約を削除してもよろしいですか？');">
+        <!-- 現在表示している予約を削除する -->
+        <form th:action="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
+              method="post"
+              onsubmit="return confirm('この予約を削除してもよろしいですか？');">
 
-        <button type="submit">削除する</button>
-    </form>
+            <button type="submit" class="delete-reservation-button">
+                削除する
+            </button>
+        </form>
 
-    <!-- 予約一覧画面へ戻る -->
-    <p>
-        <a th:href="@{/admin/reservations}">予約一覧に戻る</a>
-    </p>
+        <!-- 予約一覧画面へ戻る -->
+        <a th:href="@{/admin/reservations}"
+           class="back-list-button">
+            予約一覧に戻る
+        </a>
+
+    </div>
 </div>
 </body>
 </html>
