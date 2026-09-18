@@ -46,6 +46,12 @@ public class ReservationController {
         this.mailService = mailService;
     }
 
+    // 公開URLのトップにアクセスした場合は予約登録画面へ移動する
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/reservations/new";
+    }
+
     // 予約登録画面を表示する
     @GetMapping("/reservations/new")
     public String showReservationForm(Model model) {

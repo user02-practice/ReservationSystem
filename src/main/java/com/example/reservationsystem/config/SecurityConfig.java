@@ -23,6 +23,7 @@ public class SecurityConfig {
 
                         // お客様用の予約登録画面・予約処理・エラー画面は誰でもアクセス可能
                         .requestMatchers(
+                                "/",
                                 "/reservations/new",
                                 "/reservations",
                                 "/reservations/confirm",
